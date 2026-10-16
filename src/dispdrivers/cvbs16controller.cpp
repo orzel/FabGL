@@ -36,6 +36,7 @@
 
 #include "fabutils.h"
 #include "cvbs16controller.h"
+#include "esp_private/cache_utils.h"
 
 
 

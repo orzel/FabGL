@@ -23,6 +23,7 @@
  * along with CH32V003 driver. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "esp_timer.h"
 #include "CH32V003.h"
 #include <string.h>
 

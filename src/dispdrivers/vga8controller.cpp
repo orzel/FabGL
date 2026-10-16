@@ -43,6 +43,7 @@
 #include "fabutils.h"
 #include "vga8controller.h"
 #include "devdrivers/swgenerator.h"
+#include "esp_private/cache_utils.h"
 
 
 

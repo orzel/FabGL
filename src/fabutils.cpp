@@ -44,6 +44,8 @@ extern "C" {
 #include "soc/rtc.h"
 #include "esp_ipc.h"
 #include "soc/adc_channel.h"
+#include "esp_timer.h"
+#include "hal/gpio_ll.h"
 
 #include "fabutils.h"
 #include "fabglconf.h"
@@ -1177,7 +1179,12 @@ bool FileBrowser::format(DriveType driveType, int drive)
 
 bool FileBrowser::format(DriveType driveType, int drive)
 {
-  esp_task_wdt_init(45, false);
+  esp_task_wdt_config_t twdt_config = {
+    .timeout_ms = 45000,
+    .idle_core_mask = 0,
+    .trigger_panic = false,
+};
+esp_task_wdt_init(&twdt_config);
 
   if (driveType == DriveType::SDCard && s_SDCardMounted) {
 
@@ -1197,10 +1204,19 @@ bool FileBrowser::format(DriveType driveType, int drive)
     }
 
     // make filesystem
-    if (f_mkfs(drv, FM_ANY, 16 * 1024, buffer, FF_MAX_SS) != FR_OK) {
-      free(buffer);
-      return false;
-    }
+MKFS_PARM formatOptions = {
+    .fmt = FM_ANY,
+    .n_fat = 0,
+    .align = 0,
+    .n_root = 0,
+    .au_size = 16 * 1024,
+};
+
+if (f_mkfs(drv, &formatOptions, buffer, FF_MAX_SS) != FR_OK) {
+    free(buffer);
+    return false;
+}
+
 
     free(buffer);
 

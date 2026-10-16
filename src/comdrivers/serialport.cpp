@@ -38,9 +38,7 @@
 #include "esp_intr_alloc.h"
  
 #include "serialport.h"
- 
- 
- 
+#include "rom/gpio.h"
  
 namespace fabgl {
 

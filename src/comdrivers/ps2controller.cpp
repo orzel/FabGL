@@ -42,7 +42,7 @@
 #include "devdrivers/keyboard.h"
 #include "devdrivers/mouse.h"
 
-
+#include "soc/rtc_io_reg.h"
 
 #pragma GCC optimize ("O2")
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"

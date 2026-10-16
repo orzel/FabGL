@@ -42,6 +42,7 @@
 #include "fabutils.h"
 #include "vga16controller.h"
 #include "devdrivers/swgenerator.h"
+#include "esp_private/cache_utils.h"
 
 
 

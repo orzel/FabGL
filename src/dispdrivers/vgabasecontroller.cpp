@@ -41,6 +41,9 @@
 #include "fabutils.h"
 #include "devdrivers/swgenerator.h"
 #include "dispdrivers/vgabasecontroller.h"
+#include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
+#include "esp_log.h"
 
 
 #pragma GCC optimize ("O2")
@@ -711,7 +714,7 @@ void VGABaseController::setDMABufferView(int index, int row, int scan, bool isSt
 }
 
 
-void volatile * VGABaseController::getDMABuffer(int index, int * length)
+volatile const void * VGABaseController::getDMABuffer(int index, int * length)
 {
   *length = m_DMABuffers[index].length;
   return m_DMABuffers[index].buf;

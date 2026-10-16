@@ -149,8 +149,7 @@ class uiEvtHandler;
 class uiApp;
 class uiWindow;
 
-
-typedef void * uiTimerHandle;
+typedef TimerHandle_t uiTimerHandle;
 
 
 /** @brief Contains details about the key event */

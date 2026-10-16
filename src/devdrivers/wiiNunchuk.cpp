@@ -23,6 +23,7 @@
  * along with WiiNunchuk driver. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <math.h>
 #include "wiiNunchuk.h"
 
 namespace fabgl {

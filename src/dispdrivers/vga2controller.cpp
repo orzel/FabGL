@@ -43,7 +43,7 @@
 #include "fabutils.h"
 #include "vga2controller.h"
 #include "devdrivers/swgenerator.h"
-
+#include "esp_private/cache_utils.h"
 
 
 #pragma GCC optimize ("O2")

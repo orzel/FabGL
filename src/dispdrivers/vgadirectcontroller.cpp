@@ -158,7 +158,7 @@ void VGADirectController::setScanlineBuffer(int scanline, uint8_t volatile * lin
 }
 
 
-uint8_t volatile * VGADirectController::getScanlineBuffer(int scanline)
+uint8_t volatile const * VGADirectController::getScanlineBuffer(int scanline)
 {
   return s_DMALines[scanline]->buf;
 }

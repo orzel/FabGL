@@ -14,7 +14,9 @@ idf_component_register(SRC_DIRS src
                                 src/network
                        REQUIRES fatfs
                                 spiffs
-                                esp_adc_cal
                                 ulp
+                                esp_timer
+                                spi_flash
+                                esp_wifi
                                 nvs_flash
                                 soc)

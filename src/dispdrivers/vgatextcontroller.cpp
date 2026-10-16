@@ -12,7 +12,8 @@
 #include "vgatextcontroller.h"
 #include "devdrivers/swgenerator.h"
 #include "fonts/font_8x14.h"
-
+#include "soc/gpio_sig_map.h"
+#include "rom/gpio.h"
 
 
 #pragma GCC optimize ("O3")

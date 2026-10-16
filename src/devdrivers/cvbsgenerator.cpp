@@ -355,7 +355,10 @@ void CVBSGenerator::runDMA(lldesc_t volatile * dmaBuffers)
       I2S0.clkm_conf.clkm_div_a            = a;
       I2S0.clkm_conf.clkm_div_num          = 2;  // not less than 2
       I2S0.sample_rate_conf.tx_bck_div_num = 1;  // this makes I2S0O_BCK = I2S0_CLK
-      rtc_clk_apll_enable(true, p.sdm0, p.sdm1, p.sdm2, p.o_div);
+
+      rtc_clk_apll_coeff_set(p.o_div, p.sdm0, p.sdm1, p.sdm2);
+      rtc_clk_apll_enable(true);
+
       I2S0.clkm_conf.clka_en               = 1;
     }
 

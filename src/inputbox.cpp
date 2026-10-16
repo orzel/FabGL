@@ -23,6 +23,7 @@
   along with FabGL.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "esp_timer.h"
 
 #include <string.h>
 #include <memory>

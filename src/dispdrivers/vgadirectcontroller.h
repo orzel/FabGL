@@ -144,7 +144,7 @@ public:
    *
    * @param scanline Scanline index (0 up to screen height minus one)
    */
-  uint8_t volatile * getScanlineBuffer(int scanline);
+  uint8_t volatile const * getScanlineBuffer(int scanline);
 
   /**
    * @brief Gets default scanline buffer

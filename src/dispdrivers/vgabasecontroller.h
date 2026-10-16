@@ -346,7 +346,7 @@ protected:
 
   virtual void onSetupDMABuffer(lldesc_t volatile * buffer, bool isStartOfVertFrontPorch, int scan, bool isVisible, int visibleRow) = 0;
 
-  void volatile * getDMABuffer(int index, int * length);
+  volatile const void * getDMABuffer(int index, int * length);
 
   void allocateViewPort(uint32_t allocCaps, int rowlen);
   virtual void allocateViewPort() = 0;
