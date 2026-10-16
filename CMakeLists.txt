@@ -20,3 +20,8 @@ idf_component_register(SRC_DIRS src
                                 esp_wifi
                                 nvs_flash
                                 soc)
+
+target_compile_options(${COMPONENT_LIB} PRIVATE
+    -w
+    -Wno-error
+)
