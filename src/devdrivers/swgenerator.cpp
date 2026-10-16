@@ -58,38 +58,6 @@ void GPIOStream::begin()
   m_DMAData    = nullptr;
 }
 
-
-void GPIOStream::begin(bool div1_onGPIO0, gpio_num_t div2, gpio_num_t div4, gpio_num_t div8, gpio_num_t div16, gpio_num_t div32, gpio_num_t div64, gpio_num_t div128, gpio_num_t div256)
-{
-  m_DMAStarted = false;
-
-  if (div1_onGPIO0)
-    setupGPIO(GPIO_NUM_0,  -1, GPIO_MODE_OUTPUT); // note: GPIO_NUM_0 cannot be changed!
-  setupGPIO(div2,   0, GPIO_MODE_OUTPUT);
-  setupGPIO(div4,   1, GPIO_MODE_OUTPUT);
-  setupGPIO(div8,   2, GPIO_MODE_OUTPUT);
-  setupGPIO(div16,  3, GPIO_MODE_OUTPUT);
-  setupGPIO(div32,  4, GPIO_MODE_OUTPUT);
-  setupGPIO(div64,  5, GPIO_MODE_OUTPUT);
-  setupGPIO(div128, 6, GPIO_MODE_OUTPUT);
-  setupGPIO(div256, 7, GPIO_MODE_OUTPUT);
-
-  m_DMAData = (volatile uint8_t *) heap_caps_malloc(256, MALLOC_CAP_DMA);
-  for (int i = 0; i < 256; ++i)
-    m_DMAData[i] = i;
-
-  m_DMABuffer = (volatile lldesc_t *) heap_caps_malloc(sizeof(lldesc_t), MALLOC_CAP_DMA);
-  m_DMABuffer->eof    = 0;
-  m_DMABuffer->sosf   = 0;
-  m_DMABuffer->owner  = 1;
-  m_DMABuffer->qe.stqe_next = (lldesc_t *) m_DMABuffer;
-  m_DMABuffer->offset = 0;
-  m_DMABuffer->size   = 256;
-  m_DMABuffer->length = 256;
-  m_DMABuffer->buf    = (uint8_t*) m_DMAData;
-}
-
-
 void GPIOStream::end()
 {
   stop();
