@@ -410,7 +410,13 @@ void VGABaseController::setResolution(VGATimings const& timings, int viewPortWid
   setDMABuffersCount(calcRequiredDMABuffersCount(m_viewPortHeight));
 
   // allocate the viewport
+
+  int16_t requestedViewPortHeight = m_viewPortHeight;
   allocateViewPort();
+  if (m_viewPortHeight != requestedViewPortHeight) {
+      ESP_LOGE("VGA-MEM", "Insufficient DMA RAM for requested viewport");
+      return;
+  }
 
   // adjust again view port size if necessary
   checkViewPortSize();
@@ -457,6 +463,12 @@ void VGABaseController::allocateViewPort(uint32_t allocCaps, int rowlen)
   }
   m_viewPortMemoryPool[poolsCount] = nullptr;
 
+  if (m_viewPortHeight < remainingLines + m_viewPortHeight) {
+    ESP_LOGE("VGA-MEM",
+             "Framebuffer incomplete: allocated %d of %d rows",
+             m_viewPortHeight,
+             m_viewPortHeight + remainingLines);
+}
   // fill m_viewPort[] with line pointers
   if (isDoubleBuffered()) {
     m_viewPortHeight /= 2;
